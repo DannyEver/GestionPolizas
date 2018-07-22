@@ -3,9 +3,9 @@
         $(document).ready(function () {
 
 
-            //if (localStorage.getItem('token') == null || localStorage.getItem('token') == '') {
-            //    window.location.replace("/Home");
-            //}
+            if (localStorage.getItem('token') == null || localStorage.getItem('token') == '') {
+                window.location.replace("/Home");
+            }
 
             $.ajax({
                 type: 'GET',

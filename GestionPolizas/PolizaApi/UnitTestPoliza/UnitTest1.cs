@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net;
 using System.Net.Http.Formatting;
+using DataAccessPoliza;
 
 namespace UnitTestPoliza
 {
@@ -25,37 +26,34 @@ namespace UnitTestPoliza
             // Assert
 
             Assert.IsNotNull(listPolizas);
-            Assert.IsNotNull(listPolizas.Count);
         }
 
         [TestMethod]
-        public void TestGetAllPolizas()
+        public void TestSavePoliza()
         {
 
-            var config = new HttpConfiguration();
-            //configure web api
-            config.MapHttpAttributeRoutes();
+            // Arrange
+            var controller = new WebAPIPoliza.Controllers.PolizaController();
 
-            using (var server = new HttpServer(config))
-            {
+            Poliza poliza = new Poliza();
 
-                var client = new HttpClient(server);
+            poliza.nombre = "Poliza Veìcular";
+            poliza.descripcion = "Poliza";
+            poliza.idTipoCubrimiento = 1;
+            poliza.idTipoRiesgo = 1;
+            poliza.porcentajeCubrimiento = 50;
+            poliza.inicioVigencia = DateTime.Now;
+            poliza.periodoCobertura = 22;
+            poliza.precio = 12500032;
 
-                string url = "http://localhost:60741/api/Poliza";
 
-                var request = new HttpRequestMessage
-                {
-                    RequestUri = new Uri(url),
-                    Method = HttpMethod.Get
-                };
 
-                //request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            // Act
+            var response = controller.PostPoliza(poliza);
 
-                using (var response = client.SendAsync(request))
-                {
-                    Assert.AreEqual(HttpStatusCode.OK, response.Status);
-                }
-            }
+            // Assert
+
+            Assert.IsNotNull(response);
         }
     }
 }
