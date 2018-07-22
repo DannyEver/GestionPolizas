@@ -55,5 +55,33 @@ namespace UnitTestPoliza
 
             Assert.IsNotNull(response);
         }
+
+        [TestMethod]
+        public void TestEditPoliza()
+        {
+
+            // Arrange
+            var controller = new WebAPIPoliza.Controllers.PolizaController();
+
+            Poliza poliza = new Poliza();
+            poliza.idPoliza = 5;
+            poliza.nombre = "Poliza Vehìcular Plus";
+            poliza.descripcion = "Poliza";
+            poliza.idTipoCubrimiento = 1;
+            poliza.idTipoRiesgo = 1;
+            poliza.porcentajeCubrimiento = 50;
+            poliza.inicioVigencia = DateTime.Now;
+            poliza.periodoCobertura = 22;
+            poliza.precio = 12500032;
+
+
+
+            // Act
+            var response = controller.PutPoliza(5,poliza);
+
+            // Assert
+
+            Assert.IsNotNull(response);
+        }
     }
 }
