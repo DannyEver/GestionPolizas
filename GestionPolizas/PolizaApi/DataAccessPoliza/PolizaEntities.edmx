@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GestionPolizaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AsignacionPoliza">
+          <Key>
+            <PropertyRef Name="idAsignacionPoliza" />
+          </Key>
+          <Property Name="idAsignacionPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+          <Property Name="idEstadoPoliza" Type="int" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="datetime" Nullable="false" />
+          <Property Name="fechaCancelacion" Type="datetime" Nullable="false" />
+          <Property Name="idUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="60" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoPoliza">
+          <Key>
+            <PropertyRef Name="idEstadoPoliza" />
+          </Key>
+          <Property Name="idEstadoPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estadoDescripcion" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="idPoliza" />
+          </Key>
+          <Property Name="idPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="idTipoCubrimiento" Type="int" Nullable="false" />
+          <Property Name="inicioVigencia" Type="datetime" Nullable="false" />
+          <Property Name="periodoCobertura" Type="int" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="idTipoRiesgo" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoCubrimiento">
+          <Key>
+            <PropertyRef Name="idCubrimiento" />
+          </Key>
+          <Property Name="idCubrimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="porcentajeCobertura" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRiesgo">
+          <Key>
+            <PropertyRef Name="idTipoRiesgo" />
+          </Key>
+          <Property Name="idTipoRiesgo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionRiesgo" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Asignacio__idCli__59063A47">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idEst__5AEE82B9">
+          <End Role="EstadoPoliza" Type="Self.EstadoPoliza" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPoliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idPol__59FA5E80">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="idPoliza" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idUsu__5BE2A6F2">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idTipoCu__5FB337D6">
+          <End Role="TipoCubrimiento" Type="Self.TipoCubrimiento" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCubrimiento">
+              <PropertyRef Name="idCubrimiento" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoCubrimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idTipoRi__60A75C0F">
+          <End Role="TipoRiesgo" Type="Self.TipoRiesgo" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRiesgo">
+              <PropertyRef Name="idTipoRiesgo" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoRiesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idUsuari__5DCAEF64">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idUsuari__5EBF139D">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionPolizaModelStoreContainer">
+          <EntitySet Name="AsignacionPoliza" EntityType="Self.AsignacionPoliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoPoliza" EntityType="Self.EstadoPoliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCubrimiento" EntityType="Self.TipoCubrimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRiesgo" EntityType="Self.TipoRiesgo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asignacio__idCli__59063A47" Association="Self.FK__Asignacio__idCli__59063A47">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idEst__5AEE82B9" Association="Self.FK__Asignacio__idEst__5AEE82B9">
+            <End Role="EstadoPoliza" EntitySet="EstadoPoliza" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idPol__59FA5E80" Association="Self.FK__Asignacio__idPol__59FA5E80">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idUsu__5BE2A6F2" Association="Self.FK__Asignacio__idUsu__5BE2A6F2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idTipoCu__5FB337D6" Association="Self.FK__Poliza__idTipoCu__5FB337D6">
+            <End Role="TipoCubrimiento" EntitySet="TipoCubrimiento" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idTipoRi__60A75C0F" Association="Self.FK__Poliza__idTipoRi__60A75C0F">
+            <End Role="TipoRiesgo" EntitySet="TipoRiesgo" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idUsuari__5DCAEF64" Association="Self.FK__Poliza__idUsuari__5DCAEF64">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idUsuari__5EBF139D" Association="Self.FK__Poliza__idUsuari__5EBF139D">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionPolizaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AsignacionPoliza">
+          <Key>
+            <PropertyRef Name="idAsignacionPoliza" />
+          </Key>
+          <Property Name="idAsignacionPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoPoliza" Type="Int32" Nullable="false" />
+          <Property Name="fechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaCancelacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Asignacio__idCli__59063A47" FromRole="AsignacionPoliza" ToRole="Cliente" />
+          <NavigationProperty Name="EstadoPoliza" Relationship="Self.FK__Asignacio__idEst__5AEE82B9" FromRole="AsignacionPoliza" ToRole="EstadoPoliza" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Asignacio__idPol__59FA5E80" FromRole="AsignacionPoliza" ToRole="Poliza" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Asignacio__idUsu__5BE2A6F2" FromRole="AsignacionPoliza" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AsignacionPoliza" Relationship="Self.FK__Asignacio__idUsu__5BE2A6F2" FromRole="AspNetUsers" ToRole="AsignacionPoliza" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__idUsuari__5DCAEF64" FromRole="AspNetUsers" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AsignacionPoliza" Relationship="Self.FK__Asignacio__idCli__59063A47" FromRole="Cliente" ToRole="AsignacionPoliza" />
+        </EntityType>
+        <EntityType Name="EstadoPoliza">
+          <Key>
+            <PropertyRef Name="idEstadoPoliza" />
+          </Key>
+          <Property Name="idEstadoPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estadoDescripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AsignacionPoliza" Relationship="Self.FK__Asignacio__idEst__5AEE82B9" FromRole="EstadoPoliza" ToRole="AsignacionPoliza" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="idPoliza" />
+          </Key>
+          <Property Name="idPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="idTipoCubrimiento" Type="Int32" Nullable="false" />
+          <Property Name="inicioVigencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="periodoCobertura" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="idTipoRiesgo" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AsignacionPoliza" Relationship="Self.FK__Asignacio__idPol__59FA5E80" FromRole="Poliza" ToRole="AsignacionPoliza" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Poliza__idUsuari__5DCAEF64" FromRole="Poliza" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TipoCubrimiento" Relationship="Self.FK__Poliza__idTipoCu__5FB337D6" FromRole="Poliza" ToRole="TipoCubrimiento" />
+          <NavigationProperty Name="TipoRiesgo" Relationship="Self.FK__Poliza__idTipoRi__60A75C0F" FromRole="Poliza" ToRole="TipoRiesgo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoCubrimiento">
+          <Key>
+            <PropertyRef Name="idCubrimiento" />
+          </Key>
+          <Property Name="idCubrimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="porcentajeCobertura" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__idTipoCu__5FB337D6" FromRole="TipoCubrimiento" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="TipoRiesgo">
+          <Key>
+            <PropertyRef Name="idTipoRiesgo" />
+          </Key>
+          <Property Name="idTipoRiesgo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionRiesgo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__idTipoRi__60A75C0F" FromRole="TipoRiesgo" ToRole="Poliza" />
+        </EntityType>
+        <Association Name="FK__Asignacio__idCli__59063A47">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idEst__5AEE82B9">
+          <End Role="EstadoPoliza" Type="Self.EstadoPoliza" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPoliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idPol__59FA5E80">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="idPoliza" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__idUsu__5BE2A6F2">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AsignacionPoliza" Type="Self.AsignacionPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AsignacionPoliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idUsuari__5DCAEF64">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idUsuari__5EBF139D">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idTipoCu__5FB337D6">
+          <End Role="TipoCubrimiento" Type="Self.TipoCubrimiento" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCubrimiento">
+              <PropertyRef Name="idCubrimiento" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoCubrimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__idTipoRi__60A75C0F">
+          <End Role="TipoRiesgo" Type="Self.TipoRiesgo" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRiesgo">
+              <PropertyRef Name="idTipoRiesgo" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoRiesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionPolizaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AsignacionPoliza" EntityType="Self.AsignacionPoliza" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="EstadoPoliza" EntityType="Self.EstadoPoliza" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoCubrimiento" EntityType="Self.TipoCubrimiento" />
+          <EntitySet Name="TipoRiesgo" EntityType="Self.TipoRiesgo" />
+          <AssociationSet Name="FK__Asignacio__idCli__59063A47" Association="Self.FK__Asignacio__idCli__59063A47">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idEst__5AEE82B9" Association="Self.FK__Asignacio__idEst__5AEE82B9">
+            <End Role="EstadoPoliza" EntitySet="EstadoPoliza" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idPol__59FA5E80" Association="Self.FK__Asignacio__idPol__59FA5E80">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__idUsu__5BE2A6F2" Association="Self.FK__Asignacio__idUsu__5BE2A6F2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AsignacionPoliza" EntitySet="AsignacionPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idUsuari__5DCAEF64" Association="Self.FK__Poliza__idUsuari__5DCAEF64">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idUsuari__5EBF139D" Association="Self.FK__Poliza__idUsuari__5EBF139D">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idTipoCu__5FB337D6" Association="Self.FK__Poliza__idTipoCu__5FB337D6">
+            <End Role="TipoCubrimiento" EntitySet="TipoCubrimiento" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__idTipoRi__60A75C0F" Association="Self.FK__Poliza__idTipoRi__60A75C0F">
+            <End Role="TipoRiesgo" EntitySet="TipoRiesgo" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionPolizaModelStoreContainer" CdmEntityContainer="GestionPolizaEntities">
+          <EntitySetMapping Name="AsignacionPoliza">
+            <EntityTypeMapping TypeName="GestionPolizaModel.AsignacionPoliza">
+              <MappingFragment StoreEntitySet="AsignacionPoliza">
+                <ScalarProperty Name="idAsignacionPoliza" ColumnName="idAsignacionPoliza" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="idEstadoPoliza" ColumnName="idEstadoPoliza" />
+                <ScalarProperty Name="fechaAsignacion" ColumnName="fechaAsignacion" />
+                <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="GestionPolizaModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="GestionPolizaModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoPoliza">
+            <EntityTypeMapping TypeName="GestionPolizaModel.EstadoPoliza">
+              <MappingFragment StoreEntitySet="EstadoPoliza">
+                <ScalarProperty Name="idEstadoPoliza" ColumnName="idEstadoPoliza" />
+                <ScalarProperty Name="estadoDescripcion" ColumnName="estadoDescripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poliza">
+            <EntityTypeMapping TypeName="GestionPolizaModel.Poliza">
+              <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idTipoCubrimiento" ColumnName="idTipoCubrimiento" />
+                <ScalarProperty Name="inicioVigencia" ColumnName="inicioVigencia" />
+                <ScalarProperty Name="periodoCobertura" ColumnName="periodoCobertura" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="idTipoRiesgo" ColumnName="idTipoRiesgo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GestionPolizaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCubrimiento">
+            <EntityTypeMapping TypeName="GestionPolizaModel.TipoCubrimiento">
+              <MappingFragment StoreEntitySet="TipoCubrimiento">
+                <ScalarProperty Name="idCubrimiento" ColumnName="idCubrimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="porcentajeCobertura" ColumnName="porcentajeCobertura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRiesgo">
+            <EntityTypeMapping TypeName="GestionPolizaModel.TipoRiesgo">
+              <MappingFragment StoreEntitySet="TipoRiesgo">
+                <ScalarProperty Name="idTipoRiesgo" ColumnName="idTipoRiesgo" />
+                <ScalarProperty Name="descripcionRiesgo" ColumnName="descripcionRiesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

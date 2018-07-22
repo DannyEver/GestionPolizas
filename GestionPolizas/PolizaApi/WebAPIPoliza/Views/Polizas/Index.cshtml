@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Administración de Pólizas</h2>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <button type="button" id="btnCrearPoliza" class="btn btn-primary">Crear</button>
+            </div>
+        </div>
+       
+
+    </div>
+
+
+    <table id="polizasGrid" class="display" width="100%"></table>
+
+</div>
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        var dataSource;
+
+        $(document).ready(function () {
+
+
+            //if (localStorage.getItem('token') == null || localStorage.getItem('token') == '') {
+            //    window.location.replace("/Home");
+            //}
+
+            alert('Hola Soy Danny');
+
+      
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:60741/api/Poliza',
+                success: function (response) {
+
+                    dataSource = response
+                    console.log(response);
+
+                    $('#polizasGrid').DataTable({
+                        data: dataSource,
+                        columns: [
+                            { data: "idPoliza", title : "Id Poliza" },
+                            { data: "nombre", title: "Nombre" },
+                            { data: "descripcion", title: "Descripcion" },
+                            { data: "TipoCubrimiento", title: "TipoCubrimiento" },
+                            { data: "inicioVigencia", title: "Inicio Vigencia" },
+                            { data: "periodoCobertura", title: "Periodo Cobertura"},
+                            { data: "precio", title: "Precio" },
+                            { data: "TipoRiesgo", title: "Tipo Riesgo" },
+                            { data: "EmailEmpleado", title: "Empleado" }
+                        ]
+                    });
+                },
+                error: function (response) {
+
+                    console.log(response);
+
+                    $("#errorMessage").html("Se ha presentado un error " + response);
+
+                    setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+
+                }
+
+            });
+        });
+    </script>
+}
