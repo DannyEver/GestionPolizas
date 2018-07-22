@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "CrearPoliza";
+
+}
+
+<br />
+<br />
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Creación de Pólizas</h1>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="nombre" class="form-control" placeholder="Nombre Póliza">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="descripcion" class="col-sm-2 col-form-label">Descripción:</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" id="descripcion" class="form-control" placeholder="escripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <label for="tipoCubrimiento" class="col-sm-3 col-form-label">Tipo de Cubrimiento:</label>
+                            <div class="col-md-5">
+                                <select class="form-control" id="tipoCubrimiento" style="width:40px"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="inicioVigencia" class="col-sm-3 col-form-label">Inicio Vigencia:</label>
+                            <div class="col-md-5">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <label for="tipoCubrimiento" class="col-sm-3 col-form-label">Tipo de Cubrimiento:</label>
+                            <div class="col-md-5">
+                                <select class="form-control" id="tipoCubrimiento" style="width:200px"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="inicioVigencia" class="col-sm-3 col-form-label">Inicio Vigencia:</label>
+                            <div class="col-md-5">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        <button type="button" id="btnLogin" class="btn btn-primary btn-block ">Iniciar Sesión</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="alert-danger" id="errorMessage"></div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $('.datepicker').datepicker();
+</script>
+}

@@ -26,10 +26,14 @@ namespace WebAPIPoliza
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css"));
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/Datepicker/bootstrap-datepicker3.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
-               "~/Content/themes/base/all.css"));
+               "~/Content/themes/base/all.css", "~/Content/Datepicker/bootstrap-datepicker3.css"));
+
+           /* bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+               "~/Content/Datepicker/bootstrap-datepicker3.css"));*/
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                 "~/Scripts/DataTables/jquery.dataTables.js", "~/Scripts/DataTables/dataTables.tableTools.js",
@@ -37,7 +41,12 @@ namespace WebAPIPoliza
              "~/Scripts/DataTables/dataTables.bootstrap.js"
              ));
 
-            
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                "~/Scripts/Datepicker/bootstrap-datepicker.min.js", "~/Scripts/Datepicker/bootstrap-datepicker.tr.min.js",
+             "~/Scripts/Datepicker/moment.min.js"
+             ));
+
+
 
         }
     }

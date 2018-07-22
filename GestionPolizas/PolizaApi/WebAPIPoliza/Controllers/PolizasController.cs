@@ -14,5 +14,10 @@ namespace WebAPIPoliza.Controllers
         {
             return View();
         }
+
+        public ActionResult CrearPoliza()
+        {
+            return View();
+        }
     }
 }
