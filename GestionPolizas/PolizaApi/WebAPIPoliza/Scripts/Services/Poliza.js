@@ -48,6 +48,11 @@ $('.form-control input-number').on('input', function () {
         });
 
 
+function AbrirCrear() {
+    window.location.replace("/Polizas/CrearPoliza");
+}
+
+
         function GuardarPoliza() {
 
             var nombre = $('#nombre').val();
