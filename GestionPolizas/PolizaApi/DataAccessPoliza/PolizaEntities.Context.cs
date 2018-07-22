@@ -25,13 +25,13 @@ namespace DataAccessPoliza
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AsignacionPoliza> AsignacionPoliza { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<EstadoPoliza> EstadoPoliza { get; set; }
-        public virtual DbSet<Poliza> Poliza { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoRiesgo> TipoRiesgo { get; set; }
         public virtual DbSet<TipoCubrimiento> TipoCubrimiento { get; set; }
+        public virtual DbSet<AsignacionPoliza> AsignacionPoliza { get; set; }
+        public virtual DbSet<Poliza> Poliza { get; set; }
     }
 }

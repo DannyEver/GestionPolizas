@@ -15,7 +15,6 @@ namespace WebAPIPoliza.DTO
         public int periodoCobertura { get; set; }
         public decimal precio { get; set; }
         public string TipoRiesgo { get; set; }
-        public string EmailEmpleado { get; set; }
         public int porcentajeCubrimiento { get; set; }
     }
 }

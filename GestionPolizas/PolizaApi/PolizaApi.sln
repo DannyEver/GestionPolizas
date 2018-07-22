@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessPoliza", "DataAcc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIPoliza", "WebAPIPoliza\WebAPIPoliza.csproj", "{40681CD3-3882-4F67-9200-77C4EB6C0C08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestPoliza", "UnitTestPoliza\UnitTestPoliza.csproj", "{5893984B-0BFA-4209-9425-1066B3505FE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{40681CD3-3882-4F67-9200-77C4EB6C0C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40681CD3-3882-4F67-9200-77C4EB6C0C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40681CD3-3882-4F67-9200-77C4EB6C0C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5893984B-0BFA-4209-9425-1066B3505FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5893984B-0BFA-4209-9425-1066B3505FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5893984B-0BFA-4209-9425-1066B3505FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5893984B-0BFA-4209-9425-1066B3505FE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

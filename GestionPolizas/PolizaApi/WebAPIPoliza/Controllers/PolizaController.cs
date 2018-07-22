@@ -91,6 +91,7 @@ namespace WebAPIPoliza.Controllers
         [ResponseType(typeof(Poliza))]
         public IHttpActionResult PostPoliza(Poliza poliza)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -137,7 +138,6 @@ namespace WebAPIPoliza.Controllers
             result.idPoliza = poliza.idPoliza;
             result.descripcion = poliza.descripcion;
             result.TipoCubrimiento = poliza.TipoCubrimiento.nombre;
-            result.EmailEmpleado = poliza.AspNetUsers.Email;
             result.inicioVigencia = poliza.inicioVigencia;
             result.nombre = poliza.nombre;
             result.periodoCobertura = poliza.periodoCobertura;

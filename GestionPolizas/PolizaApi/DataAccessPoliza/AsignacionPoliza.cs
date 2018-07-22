@@ -20,11 +20,10 @@ namespace DataAccessPoliza
         public int idEstadoPoliza { get; set; }
         public System.DateTime fechaAsignacion { get; set; }
         public System.DateTime fechaCancelacion { get; set; }
-        public string idUsuario { get; set; }
+        public string userName { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual EstadoPoliza EstadoPoliza { get; set; }
         public virtual Poliza Poliza { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

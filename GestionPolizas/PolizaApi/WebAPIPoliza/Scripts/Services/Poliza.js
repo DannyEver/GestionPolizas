@@ -26,8 +26,7 @@
                             { data: "periodoCobertura", title: "Periodo Cobertura" },
                             { data: "precio", title: "Precio" },
                             { data: "TipoRiesgo", title: "Tipo Riesgo" },
-                            { data: "porcentajeCubrimiento", title: "Porcentaje cubrimiento" },
-                            { data: "EmailEmpleado", title: "Empleado" }
+                            { data: "porcentajeCubrimiento", title: "Porcentaje cubrimiento" }
                         ]
                     });
                 },
@@ -53,11 +52,11 @@ $('.form-control input-number').on('input', function () {
 
             var nombre = $('#nombre').val();
             var descripcion = $('#descripcion').val();
-            var tipoCubrimiento = $('#tipoCubrimiento').val();
+            var tipoCubrimiento = $("#tipoCubrimiento option:selected").val();
             var inicioVigencia = $('#inicioVigencia').val();
             var periodoCobertura = $('#periodoCobertura').val();
-            var precioPoliza = $('#precioPoliza').val();
-            var tipoRiesgo = $('#tipoRiesgo').val();
+            var precioPoliza = $('#precioPoliza').val(); 
+            var tipoRiesgo = $("#tipoRiesgo option:selected").val();
             var porcentaje = $('#porcentajeCobertura').val();
 
             if (nombre == "") {
@@ -120,13 +119,12 @@ $('.form-control input-number').on('input', function () {
             var poliza = {
                 nombre: nombre,
                 descripcion: descripcion,
-                tipoCubrimiento: tipoCubrimiento,
+                idTipoCubrimiento: tipoCubrimiento,
                 inicioVigencia: inicioVigencia,
                 periodoCobertura: periodoCobertura,
                 precio: precioPoliza,
-                TipoRiesgo: tipoRiesgo,
-                porcentajeCubrimiento: porcentaje,
-                EmailEmpleado: localStorage.getItem('userName')
+                idTipoRiesgo: tipoRiesgo,
+                porcentajeCubrimiento: porcentaje
             };
 
 

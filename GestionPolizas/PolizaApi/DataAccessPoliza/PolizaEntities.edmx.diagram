@@ -5,22 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d2705fbb34894633b7dedbfcb7d404b5" Name="Diagram1">
-        <EntityTypeShape EntityType="GestionPolizaModel.AsignacionPoliza" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.Cliente" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.EstadoPoliza" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionPolizaModel.Poliza" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.TipoRiesgo" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idCli__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idEst__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idPol__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idUsu__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idUsuari__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idUsuari__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoRi__60A75C0F" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GestionPolizaModel.TipoCubrimiento" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="GestionPolizaModel.AsignacionPoliza" Width="1.5" PointX="8.25" PointY="7.125" />
+        <EntityTypeShape EntityType="GestionPolizaModel.Poliza" Width="1.5" PointX="6" PointY="3.75" />
+        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idCli__59063A47" />
+        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idEst__5AEE82B9" />
+        <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idPol__59FA5E80" />
         <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6" />
+        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoRi__60A75C0F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -28,13 +28,11 @@ namespace DataAccessPoliza
         public int periodoCobertura { get; set; }
         public decimal precio { get; set; }
         public int idTipoRiesgo { get; set; }
-        public string idUsuario { get; set; }
         public int porcentajeCubrimiento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AsignacionPoliza> AsignacionPoliza { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual TipoRiesgo TipoRiesgo { get; set; }
         public virtual TipoCubrimiento TipoCubrimiento { get; set; }
+        public virtual TipoRiesgo TipoRiesgo { get; set; }
     }
 }
