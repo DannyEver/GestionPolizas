@@ -63,13 +63,13 @@
                         <div class="col-md-5">
                             <label for="periodoCobertura" class="col-sm-3 col-form-label">Periodo cobertura:</label>
                             <div class="col-md-5">
-                                <input type="number" class="form-control" id="periodoCobertura" style="width:200px" />
+                                <input type="number" class="form-control input-number" id="periodoCobertura" style="width:200px" />
                             </div>
                         </div>
                         <div class="col-md-7">
                             <label for="precioPoliza" class="col-sm-3 col-form-label">Precio Poliza:</label>
                             <div class="col-md-5">
-                                <input type="number" class="form-control" id="precioPoliza">
+                                <input type="number" class="form-control input-number" id="precioPoliza">
                             </div>
                         </div>
                     </div>
@@ -82,12 +82,18 @@
                                 <select class="form-control" id="tipoRiesgo" style="width:200px"></select>
                             </div>
                         </div>
+                        <div class="col-md-7">
+                            <label for="porcentajeCobertura" class="col-sm-3 col-form-label">Porcentaje cobertura:</label>
+                            <div class="col-md-5">
+                                <input type="number" class="form-control input-number" id="porcentajeCobertura" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-4 col-lg-offset-4">
-                    <button type="button" id="btnGuardar" class="btn btn-primary">Aceptar</button>
+                    <button type="button" id="btnGuardar" class="btn btn-primary" onclick="GuardarPoliza();">Aceptar</button>
                     <button type="button" id="btnCancelar" class="btn btn-primary">Cancelar</button>
                 </div>
             </div>
@@ -100,6 +106,7 @@
 
 <script src="~/Scripts/Services/TipoCubrimiento.js"></script>
 <script src="~/Scripts/Services/TipoRiesgo.js"></script>
+<script src="~/Scripts/Services/Poliza.js"></script>
     <script type="text/javascript">
 
         $('.datepicker').datepicker();

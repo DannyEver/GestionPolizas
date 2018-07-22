@@ -26,6 +26,7 @@
                             { data: "periodoCobertura", title: "Periodo Cobertura" },
                             { data: "precio", title: "Precio" },
                             { data: "TipoRiesgo", title: "Tipo Riesgo" },
+                            { data: "porcentajeCubrimiento", title: "Porcentaje cubrimiento" },
                             { data: "EmailEmpleado", title: "Empleado" }
                         ]
                     });
@@ -43,6 +44,10 @@
             });
         });
 
+$('.form-control input-number').on('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
 
         function GuardarPoliza() {
 
@@ -53,6 +58,7 @@
             var periodoCobertura = $('#periodoCobertura').val();
             var precioPoliza = $('#precioPoliza').val();
             var tipoRiesgo = $('#tipoRiesgo').val();
+            var porcentaje = $('#porcentajeCobertura').val();
 
             if (nombre == "") {
                 $("#errorMessage").html("Por favor ingrese nombre poliza " + response);
@@ -68,5 +74,81 @@
                 $('#inicioVigencia').focus();
             }
 
+            if (precioPoliza == "") {
+                $("#errorMessage").html("Por favor ingrese precio poliza " + response);
 
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#precioPoliza').focus();
+            }
+
+            if (periodoCobertura == "") {
+                $("#errorMessage").html("Por favor ingrese periodo de cobertura vàlido " + response);
+
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#periodoCobertura').focus();
+            }  
+
+            if (porcentaje == "") {
+                $("#errorMessage").html("Por favor ingrese porcentaje de cobertura vàlido " + response);
+
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#porcentajeCobertura').focus();
+            }
+
+            if ($("#tipoRiesgo option:selected").val() == 0) {
+                $("#errorMessage").html("Por favor seleccione un tipo de riesgo " + response);
+
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#tipoRiesgo').focus();
+            }
+
+            if($("#tipoCubrimiento option:selected").val() == 0) {
+                $("#errorMessage").html("Por favor seleccione un tipo de cubrimiento " + response);
+
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#tipoCubrimiento').focus();
+            }
+
+            if ((tipoRiesgo == 'Alta') && (porcentaje > 50)){
+                $("#errorMessage").html("Porcentaje de cobertura no debe ser mayor al 50% cuando el riesgo es 'Alta' " + response);
+
+                setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+                $('#porcentajeCobertura').focus();
+            }
+
+
+            var poliza = {
+                nombre: nombre,
+                descripcion: descripcion,
+                tipoCubrimiento: tipoCubrimiento,
+                inicioVigencia: inicioVigencia,
+                periodoCobertura: periodoCobertura,
+                precio: precioPoliza,
+                TipoRiesgo: tipoRiesgo,
+                porcentajeCubrimiento: porcentaje,
+                EmailEmpleado: localStorage.getItem('userName')
+            };
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:60741/api/Poliza',
+                data: JSON.stringify(poliza),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+
+                    dataSource = response
+                    console.log(response);
+                },
+                error: function (response) {
+
+                    console.log(response);
+
+                    $("#errorMessage").html("Se ha presentado un error " + response);
+
+                    setTimeout(function () { $("#errorMessage").html(""); }, 2000);
+
+                }
+            });
         }

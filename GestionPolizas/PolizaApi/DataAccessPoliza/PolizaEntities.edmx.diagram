@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="GestionPolizaModel.EstadoPoliza" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.Poliza" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionPolizaModel.TipoCubrimiento" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionPolizaModel.TipoRiesgo" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
         <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idCli__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idEst__5AEE82B9" ManuallyRouted="false" />
@@ -19,8 +18,9 @@
         <AssociationConnector Association="GestionPolizaModel.FK__Asignacio__idUsu__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idUsuari__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idUsuari__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6" ManuallyRouted="false" />
         <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoRi__60A75C0F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GestionPolizaModel.TipoCubrimiento" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GestionPolizaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GestionPolizaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AsignacionPoliza">
           <Key>
             <PropertyRef Name="idAsignacionPoliza" />
@@ -65,6 +65,7 @@
           <Property Name="precio" Type="decimal" Precision="18" Scale="5" Nullable="false" />
           <Property Name="idTipoRiesgo" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="porcentajeCubrimiento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -82,7 +83,6 @@
           </Key>
           <Property Name="idCubrimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="porcentajeCobertura" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoRiesgo">
           <Key>
@@ -229,8 +229,7 @@
             <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GestionPolizaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -304,8 +303,9 @@
           <Property Name="idUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AsignacionPoliza" Relationship="Self.FK__Asignacio__idPol__59FA5E80" FromRole="Poliza" ToRole="AsignacionPoliza" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Poliza__idUsuari__5DCAEF64" FromRole="Poliza" ToRole="AspNetUsers" />
-          <NavigationProperty Name="TipoCubrimiento" Relationship="Self.FK__Poliza__idTipoCu__5FB337D6" FromRole="Poliza" ToRole="TipoCubrimiento" />
           <NavigationProperty Name="TipoRiesgo" Relationship="Self.FK__Poliza__idTipoRi__60A75C0F" FromRole="Poliza" ToRole="TipoRiesgo" />
+          <Property Name="porcentajeCubrimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoCubrimiento" Relationship="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6" FromRole="Poliza" ToRole="TipoCubrimiento" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -316,15 +316,6 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TipoCubrimiento">
-          <Key>
-            <PropertyRef Name="idCubrimiento" />
-          </Key>
-          <Property Name="idCubrimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="porcentajeCobertura" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__idTipoCu__5FB337D6" FromRole="TipoCubrimiento" ToRole="Poliza" />
         </EntityType>
         <EntityType Name="TipoRiesgo">
           <Key>
@@ -406,18 +397,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Poliza__idTipoCu__5FB337D6">
-          <End Role="TipoCubrimiento" Type="Self.TipoCubrimiento" Multiplicity="1" />
-          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoCubrimiento">
-              <PropertyRef Name="idCubrimiento" />
-            </Principal>
-            <Dependent Role="Poliza">
-              <PropertyRef Name="idTipoCubrimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Poliza__idTipoRi__60A75C0F">
           <End Role="TipoRiesgo" Type="Self.TipoRiesgo" Multiplicity="1" />
           <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
@@ -437,7 +416,6 @@
           <EntitySet Name="EstadoPoliza" EntityType="Self.EstadoPoliza" />
           <EntitySet Name="Poliza" EntityType="Self.Poliza" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TipoCubrimiento" EntityType="Self.TipoCubrimiento" />
           <EntitySet Name="TipoRiesgo" EntityType="Self.TipoRiesgo" />
           <AssociationSet Name="FK__Asignacio__idCli__59063A47" Association="Self.FK__Asignacio__idCli__59063A47">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -463,15 +441,36 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
-          <AssociationSet Name="FK__Poliza__idTipoCu__5FB337D6" Association="Self.FK__Poliza__idTipoCu__5FB337D6">
-            <End Role="TipoCubrimiento" EntitySet="TipoCubrimiento" />
-            <End Role="Poliza" EntitySet="Poliza" />
-          </AssociationSet>
           <AssociationSet Name="FK__Poliza__idTipoRi__60A75C0F" Association="Self.FK__Poliza__idTipoRi__60A75C0F">
             <End Role="TipoRiesgo" EntitySet="TipoRiesgo" />
             <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
+          <EntitySet Name="TipoCubrimiento" EntityType="GestionPolizaModel.TipoCubrimiento" />
+          <AssociationSet Name="FK__Poliza__idTipoCu__5FB337D6" Association="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6">
+            <End Role="TipoCubrimiento" EntitySet="TipoCubrimiento" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TipoCubrimiento">
+          <Key>
+            <PropertyRef Name="idCubrimiento" />
+          </Key>
+          <Property Name="idCubrimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Poliza" Relationship="GestionPolizaModel.FK__Poliza__idTipoCu__5FB337D6" FromRole="TipoCubrimiento" ToRole="Poliza" />
+        </EntityType>
+        <Association Name="FK__Poliza__idTipoCu__5FB337D6">
+          <End Type="GestionPolizaModel.TipoCubrimiento" Role="TipoCubrimiento" Multiplicity="1" />
+          <End Type="GestionPolizaModel.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCubrimiento">
+              <PropertyRef Name="idCubrimiento" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoCubrimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -532,6 +531,7 @@
           <EntitySetMapping Name="Poliza">
             <EntityTypeMapping TypeName="GestionPolizaModel.Poliza">
               <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="porcentajeCubrimiento" ColumnName="porcentajeCubrimiento" />
                 <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -555,20 +555,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipoCubrimiento">
-            <EntityTypeMapping TypeName="GestionPolizaModel.TipoCubrimiento">
-              <MappingFragment StoreEntitySet="TipoCubrimiento">
-                <ScalarProperty Name="idCubrimiento" ColumnName="idCubrimiento" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="porcentajeCobertura" ColumnName="porcentajeCobertura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoRiesgo">
             <EntityTypeMapping TypeName="GestionPolizaModel.TipoRiesgo">
               <MappingFragment StoreEntitySet="TipoRiesgo">
                 <ScalarProperty Name="idTipoRiesgo" ColumnName="idTipoRiesgo" />
                 <ScalarProperty Name="descripcionRiesgo" ColumnName="descripcionRiesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCubrimiento">
+            <EntityTypeMapping TypeName="GestionPolizaModel.TipoCubrimiento">
+              <MappingFragment StoreEntitySet="TipoCubrimiento">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idCubrimiento" ColumnName="idCubrimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
