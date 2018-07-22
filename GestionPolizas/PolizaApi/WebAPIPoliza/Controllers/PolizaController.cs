@@ -15,25 +15,24 @@ namespace WebAPIPoliza.Controllers
 
     public class PolizaController : ApiController
     {
-        private IGenericRepository<Poliza> _repository = new GenericRepository<Poliza>();
+        private IGenericRepository<Poliza> _repository = new GenericRepository<Poliza>();       
 
         // GET: api/Poliza
         public List<PolizaDTO> GetPolizas()
         {
             var polizas = _repository.GetAll();
 
-            List<PolizaDTO> result = new List<PolizaDTO>();
+            List<PolizaDTO> listPoliza = new List<PolizaDTO>();
 
             foreach (var item in polizas)
             {
-                var result1 = new PolizaDTO();
-                MapEntToDTO(ref result1, item);
-                result.Add(result1);
+                var polizaDTO = new PolizaDTO();
+                MapEntToDTO(ref polizaDTO, item);
+                listPoliza.Add(polizaDTO);
 
             }
 
-            return result;
-
+            return listPoliza;
         }
 
         // GET: api/Polizas/5
@@ -144,9 +143,6 @@ namespace WebAPIPoliza.Controllers
             result.periodoCobertura = poliza.periodoCobertura;
             result.precio = poliza.precio;
             result.TipoRiesgo = poliza.TipoRiesgo.descripcionRiesgo;
-
         }
-
-
     }
 }
